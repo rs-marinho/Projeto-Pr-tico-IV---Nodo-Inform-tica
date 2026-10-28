@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nodo Informática</title>
+<meta name="theme-color" content="#0a62a8">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Nodo">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!--BODY-->
+<div class="app">
+
+  <header class="appbar">
+    <div class="pad appbar-in">
+      <a class="brand" href="#inicio" aria-label="Nodo Informática, início">
+        <svg viewBox="0 0 48 48" role="img" aria-label="Logomarca Nodo">
+          <rect x="2" y="2" width="44" height="44" rx="8" fill="var(--accent)"/>
+          <path d="M14 35V13l20 22V13" fill="none" stroke="var(--accent-ink)" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="14" cy="13" r="4.2" fill="var(--accent-ink)"/>
+          <circle cx="34" cy="35" r="4.2" fill="var(--accent-ink)"/>
+          <circle cx="34" cy="13" r="3" fill="var(--led)"/>
+        </svg>
+        <span><b>Nodo</b><small>Informática e redes</small></span>
+      </a>
+      <span class="screen-name" id="screenName">Início</span>
+    </div>
+  </header>
+
+  <main class="pad" id="view">
+
+    <!-- INÍCIO -->
+    <section class="screen" id="tela-inicio">
+      <div class="hello">
+        <span class="eyebrow">Loja de informática e redes</span>
+        <h1>O que a sua empresa precisa hoje?</h1>
+        <form class="searchbar" id="homeSearch">
+          <input id="homeQ" type="search" placeholder="Buscar switch, notebook, nobreak" aria-label="Buscar produto">
+          <button class="btn small" type="submit">Buscar</button>
+        </form>
+      </div>
+
+      <div class="ports" aria-hidden="true">
+        <div class="ports-row" id="portsA"></div>
+        <div class="ports-row" id="portsB"></div>
+        <div class="ports-cap"><span>Switch gerenciável 24 portas</span><span>Gigabit · VLAN</span></div>
+      </div>
+
+      <h2 class="sec">Atalhos</h2>
+      <div class="shortcuts">
+        <button type="button" class="short" data-go="catalogo"><b>Catálogo</b><span>12 produtos em 3 linhas</span></button>
+        <button type="button" class="short" data-go="pedido"><b>Meu pedido</b><span id="shortCart">Carrinho vazio</span></button>
+        <button type="button" class="short" data-go="conta" data-anchor="contato"><b>Falar com a loja</b><span>WhatsApp, telefone e e-mail</span></button>
+        <button type="button" class="short" data-go="conta" data-anchor="faq"><b>Ajuda</b><span>Perguntas frequentes</span></button>
+      </div>
+
+      <h2 class="sec">Mais pedidos</h2>
+      <div class="hscroll" id="featured"></div>
+
+      <h2 class="sec">Linhas de produtos</h2>
+      <div class="lines" id="lines"></div>
+
+      <h2 class="sec">Sobre a Nodo</h2>
+      <p class="prose">A Nodo vende computadores, redes e proteção de dados para pequenas e médias empresas, e monta a rede interna do cliente do cabo ao backup. Trabalhamos com linhas empresariais (SMB), com VLAN, controle de banda e garantia.</p>
+    </section>
+
+    <!-- CATÁLOGO -->
+    <section class="screen" id="tela-catalogo" hidden>
+      <input class="search" id="q" type="search" placeholder="Buscar produto" aria-label="Buscar produto">
+      <div class="chips" id="chips" role="group" aria-label="Filtrar produtos"></div>
+      <div id="list"></div>
+    </section>
+
+    <!-- PEDIDO -->
+    <section class="screen" id="tela-pedido" hidden>
+      <div id="cartView">
+        <div id="cartEmpty" class="empty">
+          <b>Seu pedido está vazio</b>
+          <p>Adicione produtos pelo catálogo para montar a solicitação.</p>
+          <button class="btn" type="button" data-go="catalogo">Ver catálogo</button>
+        </div>
+        <div id="cartFull" hidden>
+          <div class="order-list" id="orderList"></div>
+          <div class="order-total"><span>Total</span><span id="totalVal"></span></div>
+          <form class="form" id="orderForm" novalidate>
+            <h2 class="sec" style="margin:0">Finalizar pedido</h2>
+            <div class="field"><label for="f-nome">Nome ou empresa</label><input id="f-nome" type="text" autocomplete="name"><span class="err" id="e-nome"></span></div>
+            <div class="field"><label for="f-tel">Telefone com DDD</label><input id="f-tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="(51) 90000-0000"><span class="err" id="e-tel"></span></div>
+            <div class="field"><label for="f-ent">Recebimento</label>
+              <select id="f-ent"><option>Retirar na loja</option><option>Entrega no endereço da empresa</option></select></div>
+            <div class="field"><label for="f-pag">Pagamento</label>
+              <select id="f-pag"><option>Pix</option><option>Boleto</option><option>Cartão de crédito em até 10x</option><option>Faturamento para empresa</option></select></div>
+            <button class="btn" type="submit">Registrar pedido</button>
+          </form>
+        </div>
+      </div>
+
+      <div id="doneView" class="done" hidden>
+        <span class="eyebrow">Pedido registrado</span>
+        <h2 id="doneNum"></h2>
+        <p class="prose">O pedido ficou salvo neste aparelho, em Minha conta. Para a loja receber, copie a mensagem abaixo e envie pelo WhatsApp ou pelo e-mail.</p>
+        <pre id="doneText"></pre>
+        <div class="cta-row">
+          <button class="btn" type="button" id="copyOrder">Copiar mensagem</button>
+          <button class="btn ghost" type="button" data-go="conta">Meus pedidos</button>
+        </div>
+        <button class="btn ghost" type="button" id="keepShopping">Continuar comprando</button>
+      </div>
+    </section>
+
+    <!-- CONTA -->
+    <section class="screen" id="tela-conta" hidden>
+      <h2 class="sec first">Meus pedidos</h2>
+      <div id="orders"></div>
+
+      <h2 class="sec" id="contato">Contato</h2>
+      <div class="channels">
+        <div class="channel"><span class="k">WhatsApp</span><span class="v" id="c-wa">(51) 99000-0000</span><button class="btn small ghost" type="button" data-copy="c-wa">Copiar</button></div>
+        <div class="channel"><span class="k">Telefone</span><span class="v" id="c-tel">(51) 3000-0000</span><button class="btn small ghost" type="button" data-copy="c-tel">Copiar</button></div>
+        <div class="channel"><span class="k">E-mail</span><span class="v" id="c-mail">contato@nodoinformatica.com.br</span><button class="btn small ghost" type="button" data-copy="c-mail">Copiar</button></div>
+      </div>
+      <p class="prose small">Segunda a sexta, 8h às 18h. Sábado, 8h às 12h.</p>
+
+      <h2 class="sec" id="faq">Perguntas frequentes</h2>
+      <div class="faq">
+        <details><summary>Como faço um pedido?</summary><div class="ans">Adicione os itens no catálogo, abra Pedido, preencha seus dados e toque em Registrar pedido. Depois copie a mensagem e envie para a loja.</div></details>
+        <details><summary>Quais são as formas de pagamento?</summary><div class="ans">Pix, boleto, cartão de crédito em até 10 vezes e faturamento para empresas com cadastro aprovado.</div></details>
+        <details><summary>Qual é o prazo de entrega?</summary><div class="ans">Itens em estoque saem em até 2 dias úteis. Equipamentos de rede sob encomenda levam de 5 a 10 dias úteis.</div></details>
+        <details><summary>Os produtos têm garantia e nota fiscal?</summary><div class="ans">Sim. Todos têm nota fiscal e garantia do fabricante. Linhas empresariais costumam ter garantia estendida.</div></details>
+        <details><summary>Vocês instalam a rede da minha empresa?</summary><div class="ans">Fazemos projeto, cabeamento e configuração. A entrega inclui mapa de cabeamento, tabela de IPs e senhas dos equipamentos.</div></details>
+        <details><summary>Qual servidor devo comprar?</summary><div class="ans">Para guardar arquivos e fazer backup, um NAS atende bem e gasta menos energia. Para domínio ou sistemas de gestão, um servidor em torre de entrada.</div></details>
+        <details><summary>Posso devolver um produto?</summary><div class="ans">Compras feitas pelo app podem ser devolvidas em até 7 dias corridos após o recebimento, com o produto lacrado e sem uso.</div></details>
+      </div>
+
+      <h2 class="sec" id="instalar">Instalar no celular</h2>
+      <div class="install">
+        <button class="btn" type="button" id="installBtn" hidden>Instalar o app Nodo</button>
+        <dl class="steps">
+          <div><dt>Android (Chrome)</dt><dd>Toque no menu ⋮ e em Instalar app ou Adicionar à tela inicial.</dd></div>
+          <div><dt>iPhone e iPad (Safari)</dt><dd>Toque em Compartilhar e em Adicionar à Tela de Início.</dd></div>
+        </dl>
+      </div>
+      <p class="prose small">Nodo Informática, Projeto Prático IV. Produtos, preços e contatos são exemplos.</p>
+    </section>
+
+  </main>
+
+  <nav class="bottombar" aria-label="Navegação principal">
+    <div class="bottom-in">
+      <button type="button" class="nav" data-go="inicio" id="n-inicio">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span>Início</span>
+      </button>
+      <button type="button" class="nav" data-go="catalogo" id="n-catalogo">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5"/></svg><span>Catálogo</span>
+      </button>
+      <button type="button" class="nav" data-go="pedido" id="n-pedido">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span>Pedido</span><i class="badge" id="badge" hidden>0</i>
+      </button>
+      <button type="button" class="nav" data-go="conta" id="n-conta">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg><span>Conta</span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="sheet-wrap" id="sheetWrap" hidden>
+    <div class="scrim" data-close="1"></div>
+    <div class="sheet" role="dialog" aria-modal="true" aria-label="Detalhes do produto">
+      <div class="pad sheet-in">
+        <button class="close" type="button" id="sheetClose" aria-label="Fechar">×</button>
+        <div id="sheetBody"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</div>
+<!--/BODY-->
+
+<!--SW-->
+<script>
+if ('serviceWorker' in navigator && location.protocol.indexOf('http') === 0) {
+  window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js').catch(function () {}); });
+}
+</script>
+<!--/SW-->
+<script src="app.js"></script>
+</body>
+</html>
